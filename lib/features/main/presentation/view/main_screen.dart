@@ -1,12 +1,14 @@
+import 'package:calculator/features/main/presentation/view/widgets/calculator_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/configs/constants/string_constants.dart';
 import '../../../../core/configs/styles/app_colors.dart';
+import '../../models/buttons.dart';
 import '../bloc/main_bloc.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +48,38 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      flex: 5,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.f2a2d37,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.r),
-                            topRight: Radius.circular(20.r),
-                          ),
+                    flex: 5,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.w, horizontal: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.f2a2d37,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.r),
+                          topRight: Radius.circular(20.r),
                         ),
-                      ))
+                      ),
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                        ),
+                        itemCount: buttons.length,
+                        itemBuilder: (context, index) {
+                          return CalculatorButton(
+                            text: buttons[index],
+                            onTap: () {},
+                            //onTap: () => onButtonPressed(buttons[index]),
+                            color: isTopSection(buttons[index])
+                                ? AppColors.primaryColor
+                                : isSideSection(buttons[index])
+                                    ? AppColors.orange
+                                    : AppColors.white,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               );
             }),
