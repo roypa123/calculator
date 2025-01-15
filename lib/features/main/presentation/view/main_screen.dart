@@ -44,16 +44,25 @@ class MainScreen extends StatelessWidget {
                           vertical: 10.w, horizontal: 10.h),
                       alignment: Alignment.bottomRight,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            operation,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 10.sp),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              operation,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30.sp),
+                            ),
                           ),
-                          Text(
-                            result,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20.sp),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                result,
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 30.sp),
+                              ),
+                            ),
                           ),
                         ],
                       ),
