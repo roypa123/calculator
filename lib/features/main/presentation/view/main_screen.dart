@@ -8,7 +8,7 @@ import '../../models/buttons.dart';
 import '../bloc/main_bloc.dart';
 
 class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,76 +28,89 @@ class MainScreen extends StatelessWidget {
       body: SizedBox(
         width: double.maxFinite,
         height: double.maxFinite,
-        child: BlocBuilder<MainBloc, MainState>(builder: (context, state) {
-          String display = state is CalculatorResult ? state.result : '0';
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    display,
-                    style: const TextStyle(color: Colors.white, fontSize: 48),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-                  decoration: BoxDecoration(
-                    color: AppColors.f2a2d37,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.r),
-                      topRight: Radius.circular(20.r),
+        child: BlocConsumer<MainBloc, MainState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              String operation = state is CalculatorResult ? state.operation : '';
+              String result = state is CalculatorResult ? state.result : '0';
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.w, horizontal: 10.h),
+                      alignment: Alignment.bottomRight,
+                      child: Column(
+                        children: [
+                          Text(
+                            operation,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 10.sp),
+                          ),
+                          Text(
+                            result,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.sp),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      childAspectRatio: 1,
-                    ),
-                    itemCount: buttons.length,
-                    itemBuilder: (context, index) {
-                      return CalculatorButton(
-                        text: buttons[index],
-                        onTap: () {
-                          if (buttons[index] == 'C') {
-                            context
-                                .read<MainBloc>()
-                                .add(CalculatorClearEvent());
-                          } else if (buttons[index] == '=') {
-                            context
-                                .read<MainBloc>()
-                                .add(CalculatorEqualsEvent());
-                          } else {
-                            context
-                                .read<MainBloc>()
-                                .add(CalculatorInputEvent(buttons[index]));
-                          }
+                  Expanded(
+                    flex: 5,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.w, horizontal: 10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.f2a2d37,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.r),
+                          topRight: Radius.circular(20.r),
+                        ),
+                      ),
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          childAspectRatio: 1,
+                        ),
+                        itemCount: buttons.length,
+                        itemBuilder: (context, index) {
+                          return CalculatorButton(
+                            text: buttons[index],
+                            onTap: () {
+                              if (buttons[index] == 'C') {
+                                context
+                                    .read<MainBloc>()
+                                    .add(CalculatorClearEvent());
+                              } else if (buttons[index] == '=') {
+                                context
+                                    .read<MainBloc>()
+                                    .add(CalculatorEqualsEvent());
+                              } else {
+                                context
+                                    .read<MainBloc>()
+                                    .add(CalculatorInputEvent(buttons[index]));
+                              }
+                            },
+                            color: isTopSection(buttons[index])
+                                ? AppColors.primaryColor
+                                : isSideSection(buttons[index])
+                                    ? AppColors.orange
+                                    : isEqualToButton(buttons[index])
+                                        ? AppColors.red
+                                        : AppColors.white,
+                          );
                         },
-                        color: isTopSection(buttons[index])
-                            ? AppColors.primaryColor
-                            : isSideSection(buttons[index])
-                                ? AppColors.orange
-                                : isEqualToButton(buttons[index])
-                                    ? AppColors.red
-                                    : AppColors.white,
-                      );
-                    },
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          );
-        }),
+                ],
+              );
+            }),
       ),
     );
   }

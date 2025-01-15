@@ -20,7 +20,7 @@ class RouteGenerator {
             RouteConstants.routeMainScreen,
             BlocProvider<MainBloc>(
               create: (_) => sl<MainBloc>(),
-              child:  MainScreen(),
+              child: const  MainScreen(),
             ));
 
       default:

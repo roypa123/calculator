@@ -19,7 +19,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   Future<void> _onInputEvent(
       CalculatorInputEvent event, Emitter<MainState> emit) async {
     final input = event.input;
-    if (['+', '-', '×', '÷'].contains(input)) {
+    if (['+', '-', '×', '÷','%'].contains(input)) {
       _num1 = double.tryParse(_display);
       _operation = input;
       _display = '';
@@ -30,7 +30,8 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         _display += input;
       }
     }
-    emit(CalculatorResult(_display));
+
+    emit(CalculatorResult(_display,_operation ?? ""));
   }
 
   void _onClearEvent(CalculatorClearEvent event, Emitter<MainState> emit) {
@@ -59,10 +60,13 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         case '÷':
           result = _num2! != 0 ? _num1! / _num2! : null;
           break;
+        case '%':
+          result = _num2! != 0 ? _num1! % _num2! : null;
+          break;
       }
     }
 
     _display = result != null ? result.toString() : 'Error';
-    emit(CalculatorResult(_display));
+    emit(CalculatorResult(_display,_operation ??""));
   }
 }

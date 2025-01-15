@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CalculatorButton extends StatelessWidget {
   final String text;
   final Color? color;
+
   final VoidCallback onTap;
 
   const CalculatorButton(
@@ -16,7 +17,7 @@ class CalculatorButton extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppColors.f272a32,
+          color: text == '' ? AppColors.transparent : AppColors.f272a32,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
