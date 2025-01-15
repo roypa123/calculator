@@ -8,6 +8,6 @@ BLOC
 
 ## images
 
-|  <img src="https://github.com/roypa123/bmicalculator/blob/cbe2de6ccfd1def487a11dc4d28db43f7adb188e/extra_file/git_images/image1.jpeg" width="225.8" height="500"/>   |   <img src="https://github.com/roypa123/bmicalculator/blob/cbe2de6ccfd1def487a11dc4d28db43f7adb188e/extra_file/git_images/image2.jpeg" width="225.8" height="500"/>  
+|  <img src="https://github.com/roypa123/calculator/blob/2a04885241ecf7be49b721bd5b2364cb992711d2/extra_file/git_images/image1.jpeg" width="225.8" height="500"/>   |   <img src="https://github.com/roypa123/calculator/blob/2a04885241ecf7be49b721bd5b2364cb992711d2/extra_file/git_images/image2.jpeg" width="225.8" height="500"/>  
 
 
