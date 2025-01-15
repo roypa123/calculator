@@ -7,14 +7,14 @@ abstract class MainState extends Equatable {
   List<Object> get props => [];
 }
 
-class MainInitial extends MainState {}
+class CalculatorInitial extends MainState {
+  final String display;
 
-// class MainPowerButtonState extends MainState {
-//   final bool value;
-//   const MainPowerButtonState({this.value = false});
-// }
+  const CalculatorInitial(this.display);
+}
 
-class FlashlightOffState extends MainState {}
+class CalculatorResult extends MainState {
+  final String result;
 
-class FlashlightOnState extends MainState {}
-
+  const CalculatorResult(this.result);
+}
