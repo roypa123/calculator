@@ -63,6 +63,7 @@ class MainScreen extends StatelessWidget {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
+                          childAspectRatio: 1,
                         ),
                         itemCount: buttons.length,
                         itemBuilder: (context, index) {
@@ -74,7 +75,9 @@ class MainScreen extends StatelessWidget {
                                 ? AppColors.primaryColor
                                 : isSideSection(buttons[index])
                                     ? AppColors.orange
-                                    : AppColors.white,
+                                    : isEqualToButton(buttons[index])
+                                        ? AppColors.red
+                                        : AppColors.white,
                           );
                         },
                       ),
